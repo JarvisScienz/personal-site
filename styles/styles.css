@@ -8,6 +8,8 @@
 :root {
   --color-primary: #191d2b;
   --color-secondary: #27AE60;
+  --color-write-in-label: #2a2e35;
+  --color-stats-text: #b2becd;
   --color-white: #FFFFFF;
   --color-black: #000;
   --color-grey0: #f8f8f8;
@@ -22,13 +24,15 @@
 }
 
 .light-mode {
-  --color-primary: #FFFFFF;
-  --color-secondary: #F56692;
+  --color-primary: #F2F2F2;
+  --color-secondary: #088256b3;
+  --color-write-in-label: #088256b3;
+  --color-stats-text: #088256b3;
   --color-white: #454e56;
   --color-black: #000;
   --color-grey0: #f8f8f8;
   --color-grey-1: #6c7983;
-  --color-grey-2: #6c7983;
+  --color-grey-2: #F2F2F2;
   --color-grey-3: #6c7983;
   --color-grey-4: #454e56;
   --color-grey-5: #f8f8f8;
@@ -177,6 +181,8 @@ section {
   margin-left: 4rem;
   background-color: var(--color-black);
   transition: all 0.4s ease-in-out;
+  overflow: hidden; /* Contiene l'immagine all'interno dei limiti del div */
+  position: relative; /* Necessario per posizionare correttamente l'immagine */
 }
 .header-content .left-header .image img {
   width: 100%;
@@ -184,6 +190,9 @@ section {
   object-fit: cover;
   transition: all 0.4s ease-in-out;
   filter: grayscale(100%);
+  position: absolute; /* Impedisce all'immagine di modificare le dimensioni del div */
+  top: 0;
+  left: 0;
 }
 .header-content .left-header .image img:hover {
   filter: grayscale(0);
@@ -218,7 +227,7 @@ section {
   grid-gap: 2rem;
 }
 .about-container .right-about .about-item {
-  border: 1px solid var(--color-grey-5);
+  border: 1px solid var(--color-write-in-label);
   border-radius: 5px;
   transition: all 0.4s ease-in-out;
   box-shadow: 1px 2px 15px rgba(0, 0, 0, 0.1);
@@ -254,7 +263,7 @@ section {
   top: 15px;
   width: 2rem;
   height: 2px;
-  background-color: var(--color-grey-5);
+  background-color: var(--color-write-in-label);
 }
 .about-container .left-about {
   padding-right: 5rem;
@@ -290,7 +299,7 @@ section {
   align-items: center;
 }
 .about-stats .progress-bars .progress-bar .progress-con .prog-text {
-  color: var(--color-grey-2);
+  color: var(--color-stats-text);
 }
 .about-stats .progress-bars .progress-bar .progress-con .progress {
   width: 100%;
@@ -319,7 +328,7 @@ section {
   width: 90%;
 }
 .about-stats .progress-bars .progress-bar .progress-con .progress .react {
-  width: 30%;
+  width: 60%;
 }
 .about-stats .progress-bars .progress-bar .progress-con .progress .node {
   width: 70%;
@@ -339,6 +348,9 @@ section {
 .about-stats .progress-bars .progress-bar .progress-con .progress .aws {
   width: 70%;
 }
+.about-stats .progress-bars .progress-bar .progress-con .progress .mongodb {
+  width: 60%;
+}
 
 .stat-title {
   text-transform: uppercase;
@@ -354,7 +366,7 @@ section {
   top: 0;
   width: 40%;
   height: 1px;
-  background-color: var(--color-grey-5);
+  background-color: var(--color-write-in-label);
   transform: translateX(-50%);
 }
 
@@ -391,7 +403,7 @@ section {
 }
 .timeline .timeline-item .tl-duration {
   padding: 0.2rem 0.6rem;
-  background-color: var(--color-grey-5);
+  background-color: var(--color-write-in-label);
   border-radius: 15px;
   display: inline-block;
   font-size: 0.8rem;
@@ -405,12 +417,12 @@ section {
   font-weight: 600;
 }
 .timeline .timeline-item h5 span {
-  color: var(--color-grey-2);
+  color: var(--color-stats-text);
   font-weight: 500;
   font-size: 1.2rem;
 }
 .timeline .timeline-item p {
-  color: var(--color-grey-2);
+  color: var(--color-stats-text);
 }
 
 .port-text {
@@ -497,7 +509,7 @@ section {
 }
 .blogs .blog {
   position: relative;
-  background-color: var(--color-grey-5);
+  background-color: var(--color-write-in-label);
   border-radius: 5px;
   box-shadow: 1px 1px 20px rgba(0, 0, 0, 0.1);
   transition: all 0.4s ease-in-out;
@@ -583,7 +595,7 @@ section {
   display: flex;
   align-items: center;
   color: var(--color-white);
-  background-color: var(--color-grey-5);
+  background-color: var(--color-write-in-label);
   cursor: pointer;
   justify-content: center;
   width: 50px;
@@ -619,7 +631,7 @@ section {
   padding: 0.8rem 1.1rem;
   outline: none;
   border: none;
-  background-color: var(--color-grey-5);
+  background-color: var(--color-write-in-label);
   width: 100%;
   color: var(--color-white);
   resize: none;
@@ -726,6 +738,13 @@ section {
     padding-bottom: 6rem;
   }
 
+  .header-content .left-header {
+    display: flex;
+    margin-top: 20px;
+    align-items: center;
+    position: relative;
+}
+
   .left-header .h-shape {
     display: none;
   }
@@ -741,11 +760,39 @@ section {
     text-align: center;
     padding-top: 3rem;
   }
-
+  
   .header-content .left-header .image {
     margin: 0 auto;
     width: 90%;
+    height: 300px; /* Altezza fissa adeguata per mobile */
+    overflow: hidden;
+    position: relative;
+    max-height: 50vh; /* Limita l'altezza massima */
   }
+  
+  .header-content .left-header .image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Cambiato da cover a contain */
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+  /* .header-content .left-header .image {
+    margin: 0 auto;
+    width: 90%;
+    overflow: hidden;
+    position: relative;
+  }
+  
+  .header-content .left-header .image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+  } */
 
   .controls {
     top: auto;
@@ -755,7 +802,7 @@ section {
     left: 50%;
     transform: translateX(-50%);
     width: 100%;
-    background-color: var(--color-grey-5);
+    background-color: var(--color-write-in-label);
   }
   .controls .control {
     margin: 1rem 0.3rem;
@@ -773,6 +820,24 @@ section {
   }
   .about-container .left-about p {
     padding-left: 0;
+  }
+
+  .book-container {
+    grid-template-columns: repeat(1, 1fr);
+  }
+  .book-container .right-book {
+    grid-template-columns: repeat(1, 1fr);
+    padding-top: 2.5rem;
+  }
+  .book-container .left-book {
+    padding-right: 0;
+  }
+  .book-container .left-book p {
+    padding-left: 0;
+  }
+
+  .book-container p {
+    color: var(--color-stats-text);
   }
 
   .timeline {
@@ -936,6 +1001,17 @@ section {
   .left-header .image {
     width: 90% !important;
     margin: 0 auto !important;
+    overflow: hidden !important;
+    position: relative !important;
+  }
+  
+  .left-header .image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
   }
 
   .right-header {
@@ -977,5 +1053,4 @@ section {
     font-size: 4rem;
   }
 }
-
 /*# sourceMappingURL=styles.css.map */
